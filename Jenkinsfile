@@ -3,12 +3,22 @@ pipeline {
 
 
    stages {
-       stage('Build Docker Image') {
+       stage('Build') {
            steps {
 	       script {
-	           docker.build("my-static-site:${env.BUILD_NUMBER}")	
+	           dockerImage=docker.build("docker_hub/my-static-site:${env.BUILD_NUMBER}")	
                }	              
            }
        }
+
+       stage('Push') {
+           steps {
+	       script {
+                   docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-creds') {
+		       dockerImage.push()
+                   }	
+               }
+           }	
+       }	
    }
 }

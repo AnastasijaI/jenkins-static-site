@@ -3,9 +3,11 @@ pipeline {
 
 
    stages {
-       stage('Hello') {
+       stage('Build Docker Image') {
            steps {
-               echo "My first jenkins pipeline is running!"
+	       script {
+	           docker.build("my-static-site:${env.BUILD_NUMBER}")	
+               }	              
            }
        }
    }

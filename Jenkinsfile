@@ -6,7 +6,7 @@ pipeline {
        stage('Build') {
            steps {
 	       script {
-	           dockerImage=docker.build("docker_hub/my-static-site:${env.BUILD_NUMBER}")	
+	           dockerImage=docker.build("anastasijail/my-static-site:${env.BUILD_NUMBER}")	
                }	              
            }
        }
